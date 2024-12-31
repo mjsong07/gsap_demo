@@ -678,5 +678,8 @@ tl.to(".orange", {
 
 ![Dec-31-2024 09-49-42.gif](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/3dc0e1deaf3b4894a313b2ca76e4f5fa~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgamFzb25feWFuZw==:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjk3MjcwNDc5NTgwMjY1MyJ9&rk3s=e9ecf3d6&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1735696230&x-orig-sign=ROs%2FWD9WSzYtfll7j2tmgKXnTko%3D)
 
+# 文章地址
+https://juejin.cn/spost/7454203462836551734
+
 # 源码地址
 https://github.com/mjsong07/gsap_demo.git
