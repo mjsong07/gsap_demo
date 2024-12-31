@@ -63,11 +63,29 @@
         video1.pause();
       })
     }
-    tl3.to(video1, {
-      currentTime: video1.duration || 10,
-      ease: "none",
-      duration: 10
-    })
+
+
+    // 是否加载元数据
+    if (isNaN(video1.duration)) {
+      video1.onloadedmetadata = function () {
+        console.log("loaded!",video1.currentTime,video1.duration)
+        tl3.to(video1, {
+            currentTime: video1.duration || 10,
+            ease: "none",
+            duration: 10
+        })
+      };
+    } else {
+      console.log('元数据已加载')
+      tl3.to(video1, {
+        currentTime: video1.duration || 10,
+        ease: "none",
+        duration: 10
+      })
+    }
+
+
+   
   </script>
 </body>
 
