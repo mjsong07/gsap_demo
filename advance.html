@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/ScrollTrigger.min.js"></script>
+  <link href="./gsap.css" rel="stylesheet">
+</head>
+<style>
+ 
+#header {
+  margin-top: 2000px;
+}
+#footer {
+ margin-bottom: 2000px;
+} 
+.gsap {
+  color: #000;
+  position: relative;
+  box-sizing: border-box;
+  padding: 20px;
+  display: flex;
+  border: 1px solid #000;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+} 
+
+.gsap .box {
+  display: block;
+  width: 70px;
+  height: 70px;
+  margin: 10px;
+  border-radius: 12px;
+  line-height: 70px;
+  text-align: center;
+  color: #fff;
+  font-size: 16px
+}
+ 
+
+.gsap .green {
+  border: 1px solid green
+}
+
+.gsap .red {
+  border: 1px solid red
+}
+
+.gsap .blue {
+  border: 1px solid blue
+}
+
+.gsap .purple {
+  border: 1px solid purple
+}
+
+.gsap .orange {
+  border: 1px solid orange
+}
+  
+
+.gsap .box.active {
+  background-color: red;
+}
+ 
+</style>
+<body> 
+
+  <div id="header">
+
+  </div>
+  <div class="gsap">
+    <div class="box green"></div>
+    <div class="box purple"></div>
+    <div class="box orange"></div>
+  </div>
+
+  <div id="footer">
+
+  </div>
+
+
+  <script>
+//  start 注意 start ：top center 第一个参数 top 是指traget的检测边距，第二个参数是指 浏览器的检测边距center
+// ScrollTrigger 写法 
+// let tl2 = gsap.timeline()
+// tl2.to('.green', {scale: 2, duration: 1})
+// ScrollTrigger.create({
+//   animation: tl2,
+//   markers: true,
+//         start: "top center",
+//         end: "bottom center",
+//         trigger: ".gsap",
+//         scrub: true,
+//         pin: false,
+// });
+
+// pin
+// let tl2 = gsap.timeline()
+// tl2.to('.green', {scale: 2, duration: 1})
+// ScrollTrigger.create({
+//   animation: tl2,
+//   markers: true,
+//         start: "top center",
+//         end: "bottom center",
+//         trigger: ".gsap",
+//         scrub: true,
+//         pin: true,
+// });
+
+ // 特别长的滚动
+let tl1 = gsap.timeline()
+tl1.to('.purple', {scale: 2, duration: 1})
+ScrollTrigger.create({
+  animation: tl1,
+        markers: true,
+        start: "top center", 
+        end: "+=5000px", // 当前的top 再加上 5000px 的距离
+        trigger: ".gsap",
+        scrub: true,
+        pin: ".gsap",
+});
+
+
+
+    // gsap trigger写法 
+    // gsap.to(".purple", {
+    //   rotation: 360, 
+    //   backgroundColor: "orange",
+    //   scrollTrigger: {
+    //     markers: true,
+    //     start: "top center",
+    //     end: "bottom center",
+    //     trigger: ".purple",
+    //     scrub: 1,
+    //   },
+    // });
+  
+
+
+
+    // 样式开关
+    // gsap.to(".green", {
+    //   scrollTrigger: {
+    //     trigger: ".green",
+    //     start: "top center",
+    //     end: "bottom center",
+    //     markers: true,
+    //     scrub: true,
+    //     toggleClass: {
+    //       targets: ".green",
+    //       className: "active", // 激活时候背景为红色
+    //     }
+    //   }, 
+    //   duration: 1000, // 这里延迟意义不大，是根据实际滚动的帧来决定时间  
+    // });
+
+
+ // 时间线
+    // const tl = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: ".green",
+    //     scrub: true,
+    //     markers: true,
+    //     start: "top center",
+    //     end: "bottom center",
+    //   },
+    // });
+    // tl.to(".green", {
+    //   x: 100,
+    //   scale: 1.5,
+    // });
+    // tl.to(".purple", {
+    //   scale: 2,
+    //   x: 200,
+    // });
+    // tl.to(".orange", {
+    //   scale: 2.5,
+    //   x: 300,
+    // });
+  </script>
+</body>
+
+</html>

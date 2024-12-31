@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@latest/swiper-bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</head>
+<style>
+  #header {
+    margin-top: 2000px;
+  }
+
+  #footer {
+    margin-bottom: 2000px;
+  } 
+
+  .main-container {
+      position: relative; 
+      background: none no-repeat center center;
+      background-size: cover;
+      height: calc(100vh - 70px);
+      color: #fff;
+      overflow: hidden; 
+  }  
+  .container {
+      color: #000;
+      text-align: center;
+      padding: 0 0 1.5em; 
+      color: #fff;
+  }
+  .container .swiper-slide img {
+      width: 100%;
+      border-radius: 0.28em;
+  }
+  .container  .wrapper {
+      max-width: 800px;
+      padding: 0 20px; 
+  }
+  .container .swiper-container {
+      padding: 0.74em 0;
+  }
+  .main-container .swiper-pagination {
+      top: auto !important;
+      bottom: 0;
+      left: 50% !important;
+      transform: translateX(-50%);
+      max-width: 24%;
+      background-color: #EFEDE9;
+      height: 3px;
+  }  
+</style>
+
+<body>
+  <div id="header">
+  </div> 
+  <div class="main-container container">
+    <div style="position: relative;">
+        <div class="wrapper">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide swiper-slide1">
+                        <img src="https://picsum.photos/200" alt="">
+                    </div>
+                    <div class="swiper-slide swiper-slide2">
+                        <img src="https://picsum.photos/200" alt="">
+                    </div>
+                    <div class="swiper-slide swiper-slide3">
+                        <img src="https://picsum.photos/200" alt="">
+                    </div>
+                    <div class="swiper-slide swiper-slide4">
+                        <img src="https://picsum.photos/200" alt="">
+                    </div>
+                    <div class="swiper-slide swiper-slide5">
+                        <img src="https://picsum.photos/200" alt="">
+                    </div>
+                    <div class="swiper-slide swiper-slide6">
+                        <img src="https://picsum.photos/200" alt="">
+                    </div>
+                    <div class="swiper-slide swiper-slide7">
+                        <img src="https://picsum.photos/200" alt="">
+                    </div>
+                    <div class="swiper-slide swiper-slide8">
+                        <img src="https://picsum.photos/200" alt="">
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <span class="icon-arrow-right arrow-left"></span>
+        <span class="icon-arrow-right arrow-right"></span>
+    </div>
+  </div>
+
+  <div id="footer">
+  </div>
+
+  <script>
+ 
+      var mySwiper = new Swiper('.container .swiper-container', {
+          slidesPerView: 6,
+          slidesPerGroup: 6,
+          spaceBetween: 15,
+          pagination: {
+              el: '.container .swiper-pagination',
+              type : 'progressbar',
+          },
+          breakpoints: {
+              1023: {
+                  slidesPerView: 4,
+                  slidesPerGroup: 4,
+              },
+              767: {
+                  slidesPerView: 3,
+                  slidesPerGroup: 3,
+              }
+          },
+          navigation: {
+              nextEl: '.container .arrow-right',
+              prevEl: '.container .arrow-left',
+          },
+      })
+      var num = 6;
+      // if($(window).width() < 1023) { // 可以根据当前浏览器的宽度进行判断
+      //     num = 4;
+      // } 
+
+      for(i = 1;i<=num;i++){
+          window['timelineItem'+ i] =  gsap.timeline()
+          window['timelineItem'+ i].fromTo('.container .swiper-slide'+i, { x: $(window).width()/2 - $('.container .swiper-slide'+i).offset().left - $('.container .swiper-slide').width()/2 },
+          { x: 0 })
+          .to('.container .icon-arrow-right', { display: 'block' });
+          ScrollTrigger.create({
+              trigger: '.container',
+              animation: window['timelineItem'+ i],
+              start: 'top center',
+              end: "bottom top",
+              pin: true,
+              scrub: true,
+              markers :true
+          })
+      }
+  </script>
+</body>
+
+</html>

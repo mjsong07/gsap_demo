@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/ScrollTrigger.min.js"></script>
+  <link href="./gsap.css" rel="stylesheet">
+</head>
+<style>
+  #header {
+    margin-top: 2000px;
+  }
+
+  #footer {
+    margin-bottom: 2000px;
+  }
+
+  .gsap {
+    color: #000;
+    position: relative;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    border: 1px solid #000;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  } 
+</style>
+
+<body>
+  <div id="header">
+  </div>
+  <div class="gsap">
+    <video muted="" webkit-playsinline="" playsinline="" preload="auto" name="media" class="myvideo"
+      poster="https://www.google.com/images/branding/googlelogo/1x/googlelogo_light_color_272x92dp.png">
+      <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/av1/360/Big_Buck_Bunny_360_10s_1MB.mp4"
+        type="video/mp4">
+    </video>
+  </div>
+  <div id="footer">
+  </div>
+
+  <script>
+    var tl3 = gsap.timeline(); 
+    ScrollTrigger.create({
+      trigger: '.gsap',
+      animation: tl3,
+      start: 'top center',
+      end: "bottom center",
+      pin: true,
+      scrub: true,
+      markers: true
+    })
+
+    //移动端兼容处理 
+    var video1 = document.querySelector('.myvideo');
+    if (window.innerWidth < 1200) {
+      video1.play().then(function () {
+        video1.pause();
+      })
+    }
+    tl3.to(video1, {
+      currentTime: video1.duration || 10,
+      ease: "none",
+      duration: 10
+    })
+  </script>
+</body>
+
+</html>
