@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/ScrollTrigger.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<style>
+  #header {
+    margin-top: 2000px;
+  }
+
+  #footer {
+    margin-bottom: 2000px;
+  }
+
+  .container {
+    position: relative;
+    height: 80vh;
+  }
+
+  .video-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-wrapper .video-box {
+    width: 100%;
+    height: 100%;
+  }
+
+  .video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+  }
+  .tips {
+    z-index: 9999;
+    position: absolute;
+    color: red;
+    font-size: 80px;
+    opacity: 0;
+  }
+</style>
+
+<body>
+  <div id="header">
+  </div>
+  <div class="container">
+    <div class="tips t1">
+      test1
+    </div>
+    <div class="tips t2">
+      test2
+    </div> 
+    <div class="video-wrapper">
+      <div class="video-box">
+        <video muted="" webkit-playsinline="" playsinline="" preload="auto" name="media" class="video part1">
+          <source src="https://cdn.pixabay.com/video/2020/05/08/38521-418027189_tiny.mp4?download" type="video/mp4">
+        </video>
+        <video muted="" webkit-playsinline="" playsinline="" preload="auto" name="media" class="video part2"
+          loop="true">
+          <source src="https://test-videos.co.uk/vids/bigbuckbunny/mp4/av1/360/Big_Buck_Bunny_360_10s_1MB.mp4" type="video/mp4">
+        </video> 
+        <video muted="" webkit-playsinline="" playsinline="" preload="auto" name="media" class="video part3"
+          loop="true"> 
+          <source src="https://cdn.pixabay.com/video/2024/11/17/241802_tiny.mp4?download" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer">
+  </div>
+
+  <script>
+
+    var endPosition = '+=1800px'; 
+    var video1 = document.querySelector('video.part1');
+    var video2 = document.querySelector('video.part2');
+    var video3 = document.querySelector('video.part3');
+    let videoList = [video1, video2, video3]
+
+    function video1play(isPlay) {
+      $('.video.part1').show();
+      $('.video.part2').hide();
+      $('.video.part3').hide();
+      isPlay ? video1.play() : video1.pause()
+      video2.pause()
+      video3.pause()
+    }
+    function video2play() {
+      $('.video.part1').hide();
+      $('.video.part2').show();
+      $('.video.part3').hide();
+      video1.pause()
+      video2.play()
+      video3.pause()
+    }
+    function video3play() {
+      $('.video.part1').hide();
+      $('.video.part2').hide();
+      $('.video.part3').show();
+      video1.pause()
+      video2.pause()
+      video3.play()
+    }
+
+    var tl50 = gsap.timeline({ default: { ease: "power3.inOut" } });
+    tl50.fromTo(`.tips.t1`, { y: 10, opacity: 0 }, { // 显示第一个标签
+      y: 0, opacity: 1, duration: 1, onComplete: () => {
+        video2play()
+      }, onReverseComplete: function () {
+        video1play(true)
+      }
+    })  
+    .to('.tips.t1', {  opacity: 0, display: 'none', duration: 1 }) // 隐藏第1个标签
+    .fromTo('.tips.t2', { y: 10, opacity: 0 }, {  y: 0, opacity: 1, duration: 1}) // 显示第3个标签
+    .to('.tips.t2 ', {
+        opacity: 0, display: 'none', duration: 1, onComplete: () => {
+          video3play()
+
+        }, onReverseComplete: function () {
+          video2play()
+        }
+      })
+    ScrollTrigger.create({
+      trigger: '.container',
+      animation: tl50,
+      start: 'center center',
+      end: endPosition,
+      pin: true,
+      markers: true,
+      scrub: true,
+      onEnter: function () {
+        video1play(true)
+      },
+      onEnterBack: function () {
+        // video1play(false) 
+      }
+    }) 
+  </script>
+</body>
+
+</html>
